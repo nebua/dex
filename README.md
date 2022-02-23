@@ -141,3 +141,14 @@ Alternatively, install Go and Docker manually or using a package manager. Instal
 ## License
 
 The project is licensed under the [Apache License, Version 2.0](LICENSE).
+
+## Build Image
+```
+docker build -t nebua/nebua-dex .
+docker run -p4000:4000 nebua/acordo-site
+```
+
+## Working with MicroK8s’ built-in registry
+```
+microk8s.docker build -t nebua/nebua-dex .
+```

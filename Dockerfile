@@ -14,6 +14,12 @@ ENV GOOS=${TARGETOS} GOARCH=${TARGETARCH} GOARM=${TARGETVARIANT}
 
 ARG GOPROXY
 
+# Customize the official container image
+ENV DEX_FRONTEND_DIR=./web-nebua
+
+COPY --chown=root:root web ./web-nebua
+# End
+
 COPY go.mod go.sum ./
 COPY api/v2/go.mod api/v2/go.sum ./api/v2/
 RUN go mod download
