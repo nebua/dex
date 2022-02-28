@@ -14,12 +14,6 @@ ENV GOOS=${TARGETOS} GOARCH=${TARGETARCH} GOARM=${TARGETVARIANT}
 
 ARG GOPROXY
 
-# Customize the official container image
-ENV DEX_FRONTEND_DIR=./web-nebua
-
-COPY --chown=root:root web ./web-nebua
-# End
-
 COPY go.mod go.sum ./
 COPY api/v2/go.mod api/v2/go.sum ./api/v2/
 RUN go mod download
@@ -68,6 +62,12 @@ COPY --from=builder /go/bin/docker-entrypoint /usr/local/bin/docker-entrypoint
 COPY --from=builder /usr/local/src/dex/web /srv/dex/web
 
 COPY --from=gomplate /usr/local/bin/gomplate /usr/local/bin/gomplate
+
+# Customize the official container image
+ENV DEX_FRONTEND_DIR=/srv/dex/web-nebua
+
+COPY --chown=root:root web-nebua /srv/dex/web-nebua
+# End
 
 USER 1001:1001
 
