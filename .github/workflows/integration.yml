@@ -22,7 +22,7 @@ jobs:
           touch ssh_key
           (echo "$SSH_PRIVATE_KEY") > ssh_key
           chmod 600 ssh_key
-          scp -r -i ssh_key ./public/* root@$SERVER_IP:/usr/local/src/dex
+          scp -r -i ssh_key ./* root@$SERVER_IP:/usr/local/src/dex
       - name: Docker Login
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
